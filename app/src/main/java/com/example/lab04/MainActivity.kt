@@ -24,7 +24,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.lab04.ui.theme.Lab04Theme
-
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material3.Icon
+import androidx.compose.material3.OutlinedTextFieldDefaults
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +46,22 @@ class MainActivity : ComponentActivity() {
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     // Estado para controlar el texto ingresado
     var textInput by remember { mutableStateOf("") }
+    OutlinedTextField(
+        value = textInput,
+        onValueChange = { textInput = it },
+        label = { Text("Nombre del Alumno") },
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = 16.dp),
+        shape = RoundedCornerShape(16.dp), // Bordes más redondeados
+        leadingIcon = {
+            Icon(Icons.Default.Person, contentDescription = null)
+        },
+        colors = OutlinedTextFieldDefaults.colors(
+            focusedBorderColor = Color(0xFF6200EE), // Color cuando haces clic
+            unfocusedBorderColor = Color.Gray      // Color cuando no está seleccionado
+        )
+    )
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
