@@ -8,27 +8,17 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import com.example.lab04.ui.theme.Lab04Theme
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Person
-import androidx.compose.material3.Icon
-import androidx.compose.material3.OutlinedTextFieldDefaults
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import com.example.lab04.ui.theme.Lab04Theme
+
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,27 +36,17 @@ class MainActivity : ComponentActivity() {
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     // Estado para controlar el texto ingresado
     var textInput by remember { mutableStateOf("") }
-    OutlinedTextField(
-        value = textInput,
-        onValueChange = { textInput = it },
-        label = { Text("Nombre del Alumno") },
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(top = 16.dp),
-        shape = RoundedCornerShape(16.dp), // Bordes más redondeados
-        leadingIcon = {
-            Icon(Icons.Default.Person, contentDescription = null)
-        },
-        colors = OutlinedTextFieldDefaults.colors(
-            focusedBorderColor = Color(0xFF6200EE), // Color cuando haces clic
-            unfocusedBorderColor = Color.Gray      // Color cuando no está seleccionado
-        )
-    )
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
-            TopAppBar(title = { Text("Laboratorio 04") })
+            TopAppBar(
+                title = { Text("Laboratorio 04 - Premium") },
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = Color(0xFF6200EE), // Color púrpura Tecsup
+                    titleContentColor = Color.White
+                )
+            )
         }
     ) { paddingValues ->
         Column(
@@ -74,8 +54,9 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
                 .padding(paddingValues)
                 .padding(16.dp)
         ) {
-            Text(text = "¡Hola $name!")
+            Text(text = "¡Hola $name!", modifier = Modifier.padding(bottom = 8.dp))
 
+            // Componente Card (Segundo componente)
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -83,20 +64,27 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
                 elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
             ) {
                 Column(modifier = Modifier.padding(16.dp)) {
-                    Text(text = "Este es el componente Card")
-                    Text(text = "Ideal para resaltar información.")
+                    Text(text = "Este es el componente Card", style = MaterialTheme.typography.titleMedium)
+                    Text(text = "Ideal para resaltar información del alumno.")
                 }
             }
 
-            // --- ESTO ES LO NUEVO PARA EL TERCER COMMIT ---
+            // OutlinedTextField Mejorado (Tercer componente con estilos de la rama main)
             OutlinedTextField(
                 value = textInput,
                 onValueChange = { textInput = it },
-                label = { Text("Ingresa tu apellido") },
+                label = { Text("Nombre Completo") },
                 modifier = Modifier.fillMaxWidth(),
-                placeholder = { Text("Ejemplo: Quispe") }
+                shape = RoundedCornerShape(16.dp), // Bordes redondeados
+                leadingIcon = {
+                    Icon(Icons.Default.Person, contentDescription = null)
+                },
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedBorderColor = Color(0xFF6200EE),
+                    unfocusedBorderColor = Color.Gray
+                ),
+                placeholder = { Text("Ejemplo: Joseph Quispe") }
             )
-            // -----------------------------------------------
         }
     }
 }
