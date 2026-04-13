@@ -6,7 +6,10 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -23,7 +26,6 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             Lab04Theme {
-                // Llamamos directamente a Greeting
                 Greeting(name = "Joseph")
             }
         }
@@ -47,7 +49,19 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
             Text(text = "¡Hola $name!")
             Text(text = "Contenido del Scaffold")
 
-            // Aquí es donde agregarás los componentes para tus siguientes commits
+            // --- ESTO ES LO NUEVO PARA EL SEGUNDO COMMIT ---
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 16.dp),
+                elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+            ) {
+                Column(modifier = Modifier.padding(16.dp)) {
+                    Text(text = "Este es el componente Card")
+                    Text(text = "Se usa para agrupar contenido relevante.")
+                }
+            }
+            // -----------------------------------------------
         }
     }
 }
