@@ -24,6 +24,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.lab04.ui.theme.Lab04Theme
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.ui.graphics.Color
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,13 +42,17 @@ class MainActivity : ComponentActivity() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
-    // Estado para controlar el texto ingresado
-    var textInput by remember { mutableStateOf("") }
-
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
-            TopAppBar(title = { Text("Laboratorio 04") })
+            TopAppBar(
+                title = { Text("Laboratorio 04 - Premium") },
+                // CAMBIO DE ESTILO: Colores personalizados
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = Color(0xFF6200EE), // Un color púrpura de Tecsup
+                    titleContentColor = Color.White
+                )
+            )
         }
     ) { paddingValues ->
         Column(
