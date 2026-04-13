@@ -11,10 +11,15 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -35,6 +40,9 @@ class MainActivity : ComponentActivity() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
+    // Estado para controlar el texto ingresado
+    var textInput by remember { mutableStateOf("") }
+
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
@@ -47,20 +55,27 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
                 .padding(16.dp)
         ) {
             Text(text = "¡Hola $name!")
-            Text(text = "Contenido del Scaffold")
 
-            // --- ESTO ES LO NUEVO PARA EL SEGUNDO COMMIT ---
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 16.dp),
+                    .padding(vertical = 16.dp),
                 elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
             ) {
                 Column(modifier = Modifier.padding(16.dp)) {
                     Text(text = "Este es el componente Card")
-                    Text(text = "Se usa para agrupar contenido relevante.")
+                    Text(text = "Ideal para resaltar información.")
                 }
             }
+
+            // --- ESTO ES LO NUEVO PARA EL TERCER COMMIT ---
+            OutlinedTextField(
+                value = textInput,
+                onValueChange = { textInput = it },
+                label = { Text("Ingresa tu apellido") },
+                modifier = Modifier.fillMaxWidth(),
+                placeholder = { Text("Ejemplo: Quispe") }
+            )
             // -----------------------------------------------
         }
     }
